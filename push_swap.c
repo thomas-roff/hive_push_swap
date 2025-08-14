@@ -12,7 +12,8 @@
 
 #include "libft/libft.h"
 
-t_dbllist	*ft_dbllstnew(void *content)
+/*
+t_dbllist	*ft_dbllstnew(void *data)
 {
 	t_dbllist	*lst;
 
@@ -21,11 +22,11 @@ t_dbllist	*ft_dbllstnew(void *content)
 		return (NULL);
 	else
 	{
-		lst->content = content;
-		lst->index = 0;
+		lst->data = data;
+		lst->len = 1;
 	}
-	lst->prev = NULL;
-	lst->next = NULL;
+	lst->prev = lst;
+	lst->next = lst;
 	return (lst);
 }
 
@@ -45,6 +46,7 @@ int	ft_dbllstadd_back(t_dbllist **lst, t_dbllist *new)
 	new->next = *lst;
 	new->prev = (*lst)->prev;
 	(*lst)->prev = new;
+	(*lst)->len += 1;
 	return (1);
 }
 
@@ -62,16 +64,56 @@ int	ft_dbllstadd_front(t_dbllist **lst, t_dbllist *new)
 	return (1);
 }
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	if (!lst || !f)
-		return ;
+		return (-1);
 	while (lst)
 	{
-		f(lst->content);
+		f(lst->data);
 		lst = lst->next;
 	}
+	return (1);
 }
+
+t_dbllist	*build_list(char **array)
+{
+	t_dbllist	*lst;
+	int			i;
+
+	lst = ft_dbllstnew(array[0]);
+	if (!lst)
+		return (NULL);
+	i = 1;
+	while (array[i])
+	{
+		if (!ft_dbllstadd_back(&lst, ft_dbllstnew(array[i])))
+			return (NULL);
+		i++;
+	}
+	return (lst);
+}
+
+int	ft_printdbllist(t_dbllist *lst)
+{
+	t_dbllist	*temp;
+	int			i;
+
+	if (!lst)
+		return (-1);
+	temp = lst;
+	i = lst->len;
+	ft_printf("Length is: %d\n", i);
+	while (i > 0)
+	{
+		if(!ft_printf("Data is: %s\n", temp->data))
+			return (-1);
+		temp = temp->next;
+		i--;
+	}
+	return (1);
+}
+*/
 
 int	check_dup(char **array)
 {
@@ -113,36 +155,58 @@ int	ft_arrcheck(char **array, int (f)(int))
 	return (1);
 }
 
-t_dbllist	*build_list(char **array)
+int	ft_arraylen(char **array)
 {
-	t_dbllist	*lst;
-	int			i;
+	int	len;
 
-	lst = ft_dbllstnew(array[0]);
-	lst->index = 0;
-	if (!lst)
+	if (!array || !*array)
+		return (0);
+	len = 0;
+	while (array[len])
+		len++;
+	return (len);
+}
+
+int	*build_stack(char **array)
+{
+	int	*stack;
+	int	i;
+
+	stack = malloc((ft_arraylen(array) + 1) * sizeof(int));
+	if (!stack)
 		return (NULL);
-	i = 1;
+	i = 0;
 	while (array[i])
 	{
-		if (!ft_dbllstadd_back(&lst, ft_dbllstnew(array[i])))
-			return (NULL);
+		stack[i] = ft_atoi(array[i]);
 		i++;
 	}
-	return (lst);
+	array[i] = NULL;
+	return (stack);
+}
+
+void	print_stack(int	*stack)
+{
+	int i;
+
+	i = 0;
+	while (stack[i])
+	{
+		ft_printf("Data is: %d\n", stack[i]);
+		i++;
+	}
 }
 
 void	check_build_sort(char **array)
 {
-	t_dbllist	*list;
+	int	*stack;
 
 	if (ft_arrcheck(array, ft_isnum) == -1 || check_dup(array) == -1)
 		return ;
-	list = build_list(array);
-	if (!list)
+	stack = build_stack(array);
+	if (!stack)
 		return ;
-	
-	//push_swap(list);
+	print_stack(stack);
 }
 
 char	**string_input(char *str)

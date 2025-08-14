@@ -12,13 +12,14 @@
 
 #include "../libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	if (!lst || !f)
-		return ;
+		return (-1);
 	while (lst)
 	{
-		f(lst->content);
+		f(lst->data);
 		lst = lst->next;
 	}
+	return (1);
 }
