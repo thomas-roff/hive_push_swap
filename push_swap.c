@@ -115,6 +115,8 @@ int	ft_printdbllist(t_dbllist *lst)
 }
 */
 
+
+
 int	check_dup(char **array)
 {
 	int i;
@@ -167,39 +169,59 @@ int	ft_arraylen(char **array)
 	return (len);
 }
 
-int	*build_stack(char **array)
+void	free_and_exit(int **stack, int len)
 {
-	int	*stack;
 	int	i;
 
-	stack = malloc((ft_arraylen(array) + 1) * sizeof(int));
+	i = 0;
+	while (i < len)
+	{
+		free(stack[i]);
+		i++;
+	}
+}
+
+int	**build_stack(char **array)
+{
+	int	**stack;
+	int	i;
+	int	len;
+
+	len = ft_arraylen(array);
+	stack = malloc((len + 1) * sizeof(int *));
 	if (!stack)
 		return (NULL);
 	i = 0;
 	while (array[i])
 	{
-		stack[i] = ft_atoi(array[i]);
+		stack[i] = malloc(2 * sizeof(int));
+		if (!stack[i])
+		{
+			free_and_exit(stack, i);
+			return (NULL);
+		}
+		stack[i][0] = ft_atoi(array[i]);
 		i++;
 	}
-	array[i] = NULL;
+	stack[len] = NULL;
 	return (stack);
 }
 
-void	print_stack(int	*stack)
+void	print_stack(int	**stack)
 {
 	int i;
 
 	i = 0;
 	while (stack[i])
 	{
-		ft_printf("Data is: %d\n", stack[i]);
+		ft_printf("Data is: %d\n", stack[i][0]);
 		i++;
 	}
 }
 
 void	check_build_sort(char **array)
 {
-	int	*stack;
+	int	**stack;
 
 	if (ft_arrcheck(array, ft_isnum) == -1 || check_dup(array) == -1)
 		return ;
@@ -207,6 +229,8 @@ void	check_build_sort(char **array)
 	if (!stack)
 		return ;
 	print_stack(stack);
+	// TODO make the build index function
+	build_index(stack);
 }
 
 char	**string_input(char *str)
