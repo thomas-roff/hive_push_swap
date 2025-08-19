@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+#include <stdint.h>
 
 /*
 t_dbllist	*ft_dbllstnew(void *data)
@@ -115,8 +116,6 @@ int	ft_printdbllist(t_dbllist *lst)
 }
 */
 
-
-
 int	check_dup(char **array)
 {
 	int i;
@@ -169,7 +168,20 @@ int	ft_arraylen(char **array)
 	return (len);
 }
 
-void	free_and_exit(int **stack, int len)
+void	free_and_exit(int **stack)
+{
+	int	i;
+
+	i = 0;
+	while (stack[i])
+	{
+		free(stack[i]);
+		i++;
+	}
+	free(stack);
+}
+
+void	error_free_and_exit(int **stack, int len)
 {
 	int	i;
 
@@ -179,15 +191,55 @@ void	free_and_exit(int **stack, int len)
 		free(stack[i]);
 		i++;
 	}
+	free(stack);
 }
 
-int	**build_stack(char **array)
+long long	ft_super_atoi(const char *nptr)
 {
-	int	**stack;
-	int	i;
-	int	len;
+	long long	res;
+	int			pn;
+	int			digit;
 
-	len = ft_arraylen(array);
+	res = 0;
+	pn = 1;
+	while (ft_isspace((int)*nptr) == 1)
+		nptr++;
+	if (*nptr == '-')
+	{
+		pn = pn * -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (ft_isdigit((int)*nptr) == 1)
+	{
+		digit = *nptr - '0';
+		res = res * 10 + digit;
+		nptr++;
+	}
+	return (res * pn);
+}
+
+int	ft_issorted(int **stack)
+{
+	int	i;
+
+	i = 0;
+	while (stack[i] && stack[i + 1])
+	{
+		if (stack[i][0] > stack[i + 1][0])
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
+int	**build_stack(char **array, int len)
+{
+	int			**stack;
+	long long	temp;
+	int			i;
+
 	stack = malloc((len + 1) * sizeof(int *));
 	if (!stack)
 		return (NULL);
@@ -195,15 +247,21 @@ int	**build_stack(char **array)
 	while (array[i])
 	{
 		stack[i] = malloc(2 * sizeof(int));
-		if (!stack[i])
+		temp = ft_super_atoi(array[i]);
+		if (!stack[i] || temp > INT32_MAX || temp < INT32_MIN)
 		{
-			free_and_exit(stack, i);
+			error_free_and_exit(stack, i + 1);
 			return (NULL);
 		}
-		stack[i][0] = ft_atoi(array[i]);
+		stack[i][0] = (int)temp;
 		i++;
 	}
 	stack[len] = NULL;
+	if (ft_issorted(stack) == 1)
+	{
+		free_and_exit(stack);
+		return (NULL);
+	}
 	return (stack);
 }
 
@@ -219,18 +277,37 @@ void	print_stack(int	**stack)
 	}
 }
 
+
+void	three_stack(int **stack)
+{
+	ft_printf("Stack is small\n");
+}
+
+void	small_stack(int	**stack, int len)
+{
+	if (len <= 3)
+		three_stack(stack);
+}
+
+
 void	check_build_sort(char **array)
 {
 	int	**stack;
+	int	len;
 
-	if (ft_arrcheck(array, ft_isnum) == -1 || check_dup(array) == -1)
+	len = ft_arraylen(array);
+	if (ft_arrcheck(array, ft_isnum) == -1 || check_dup(array) == -1
+		|| len == 1)
 		return ;
-	stack = build_stack(array);
+	stack = build_stack(array, len);
 	if (!stack)
 		return ;
 	print_stack(stack);
-	// TODO make the build index function
-	build_index(stack);
+	if (len <= 5)
+		small_stack(stack, len);
+	//else
+		//radix_sort(stack);
+	free_and_exit(stack);
 }
 
 char	**string_input(char *str)
@@ -248,12 +325,28 @@ char	**string_input(char *str)
 	return (array);
 }
 
+void	free_array(char **array)
+{
+	while (*array)
+	{
+		free(*array);
+		array++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
+	char	**array;
+
 	if (argc == 1)
 		return (0);
 	if (argc == 2)
-		check_build_sort(string_input(argv[1]));
+	{
+		array = string_input(argv[1]);
+		check_build_sort(array);
+		free_array(array);
+		free(array);
+	}
 	if (argc > 2)
 		check_build_sort(&argv[1]);
 	return (0);
