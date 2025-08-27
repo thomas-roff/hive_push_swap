@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:07:57 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/25 18:44:19 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/08/25 20:36:31 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	print_stack(int **stack);
 
 int	**build_stack(char **array, int len);
 int	**build_empty_stack(int len);
+unsigned int	**build_uin_stack(int **stack, int len);
+void	free_and_exit_uin(unsigned int **stack_a, unsigned int **stack_b);
 
 // SORT OPERATIONS
 
@@ -42,6 +44,14 @@ void	op_rra(int **stack, int len);
 void	op_pa(int **stack_a, int **stack_b);
 void	op_pb(int **stack_a, int **stack_b);
 
+// UNSIGNED SORT OPERATIONS
+
+void	uin_op_sa(unsigned int **stack);
+void	uin_op_ra(unsigned int **stack, int len);
+void	uin_op_rra(unsigned int **stack, int len);
+void	uin_op_pa(unsigned int **stack_a, unsigned int **stack_b);
+void	uin_op_pb(unsigned int **stack_a, unsigned int **stack_b);
+
 // SMALL STACKS
 
 void	three_stack(int **stack);
@@ -50,14 +60,19 @@ void	push_min(int **stack_a, int **stack_b, int len);
 void	four_stack(int **stack_a, int **stack_b);
 void	five_stack(int **stack_a, int **stack_b);
 
+// UNSIGNED INT UTILITIES
+
+int	ft_uinstacklen(unsigned int **stack);
+void	print_uin_stack(unsigned int **stack);
+
 // PUSH SWAP
 
 long long	ft_super_atoi(const char *nptr);
 void	small_stack(int **stack_a, int **stack_b, int len);
-int	neg_max_bits(int **stack);
-int	pos_max_bits(int **stack);
-int	get_max_bits(int **stack);
-void	radix_sort(int **stack_a, int **stack_b);
+int	neg_max_bits(unsigned int **stack);
+int	pos_max_bits(unsigned int **stack);
+int	get_max_bits(unsigned int **stack);
+void	radix_unsigned_sort(unsigned int **stack_a, unsigned int **stack_b);
 void	check_build_sort(char **array);
 char	**string_input(char *str);
 void	free_array(char **array);

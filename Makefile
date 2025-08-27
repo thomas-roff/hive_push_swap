@@ -6,12 +6,12 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/25 18:52:51 by thblack-          #+#    #+#              #
-#    Updated: 2025/08/25 19:45:15 by thblack-         ###   ########.fr        #
+#    Updated: 2025/08/25 20:31:09 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES = array_utils.c build_funcs.c small_stacks.c sort_operations.c \
-		  stack_utils.c
+		  stack_utils.c uin_utils.c uin_sort_operations.c
 MAIN = push_swap.c
 
 CC = cc
@@ -23,6 +23,8 @@ HEADER = push_swap.h
 NAME = push_swap
 
 all: start libft utils $(NAME) finish
+
+ex: start utils $(NAME) finish exclean
 
 start:
 	@echo "==== BUILDING PUSH_SWAP ===="
@@ -46,6 +48,10 @@ clean:
 	@echo "Removing push_swap object files."
 	@rm -f $(OBJECTS) $(MAIN_OBJECT)
 	@make -C libft clean --no-print-directory
+
+exclean:
+	@echo "Removing push_swap object files."
+	@rm -f $(OBJECTS) $(MAIN_OBJECT)
 
 fclean: clean
 	@echo "Removing push_swap static library files."
