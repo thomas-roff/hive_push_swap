@@ -6,12 +6,12 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/25 18:52:51 by thblack-          #+#    #+#              #
-#    Updated: 2025/08/25 20:31:09 by thblack-         ###   ########.fr        #
+#    Updated: 2025/08/27 15:25:01 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES = array_utils.c build_funcs.c small_stacks.c sort_operations.c \
-		  stack_utils.c uin_utils.c uin_sort_operations.c
+		  stack_utils.c uin_sort_operations.c radix_sort.c
 MAIN = push_swap.c
 
 CC = cc

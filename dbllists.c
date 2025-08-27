@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 09:58:03 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/20 09:58:46 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:16:53 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_printdbllist(t_dbllist *lst)
 	ft_printf("Length is: %d\n", i);
 	while (i > 0)
 	{
-		if(!ft_printf("Data is: %s\n", temp->data))
+		if (!ft_printf("Data is: %s\n", temp->data))
 			return (-1);
 		temp = temp->next;
 		i--;

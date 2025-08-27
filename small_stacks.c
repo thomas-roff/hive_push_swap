@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:27:43 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/25 18:27:56 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:13:52 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ int	find_min(int **stack)
 	min = stack[0][0];
 	min_index = 0;
 	while (stack[++i] && stack[i][1] < 2)
+	{
 		if (stack[i][0] < min)
 		{
 			min = stack[i][0];
 			min_index = i;
 		}
+	}
 	return (min_index);
 }
 

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:21:46 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/25 20:35:33 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:14:09 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	uin_op_sa(unsigned int **stack)
 
 void	uin_op_ra(unsigned int **stack, int len)
 {
-	int	i;
+	int				i;
 	unsigned int	temp;
 
 	i = 0;

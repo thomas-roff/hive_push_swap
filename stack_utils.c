@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:13:52 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/25 20:28:39 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:20:55 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,22 @@ void	error_free_and_exit(int **stack, int len)
 	}
 }
 
-void	print_stack(int **stack)
+int	ft_uinstacklen(unsigned int **stack)
 {
+	int	len;
 	int	i;
 
+	if (!stack || !*stack)
+		return (0);
+	len = 0;
+	while (stack[len])
+		len++;
 	i = 0;
 	while (stack[i])
 	{
-		ft_printf("Data is: %d %d\n", stack[i][0], stack[i][1]);
+		if (stack[i][1] == 2 && i < len)
+			return (i);
 		i++;
 	}
+	return (len);
 }

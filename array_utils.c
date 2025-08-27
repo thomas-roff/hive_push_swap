@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:11:08 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/25 18:15:49 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:23:05 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,39 @@ int	ft_arraylen(char **array)
 	while (array[len])
 		len++;
 	return (len);
+}
+
+void	free_array(char **array)
+{
+	while (*array)
+	{
+		free(*array);
+		array++;
+	}
+}
+
+long long	ft_super_atoi(const char *nptr)
+{
+	long long	res;
+	int			pn;
+	int			digit;
+
+	res = 0;
+	pn = 1;
+	while (ft_isspace((int)*nptr) == 1)
+		nptr++;
+	if (*nptr == '-')
+	{
+		pn = pn * -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (ft_isdigit((int)*nptr) == 1)
+	{
+		digit = *nptr - '0';
+		res = res * 10 + digit;
+		nptr++;
+	}
+	return (res * pn);
 }

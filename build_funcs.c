@@ -94,7 +94,7 @@ unsigned int	**build_uin_stack(int **stack, int len)
 	return (uin_stack);
 }
 
-void	free_and_exit_uin(unsigned int **stack_a, unsigned int **stack_b)
+void	free_exit_uin(unsigned int **stack_a, unsigned int **stack_b)
 {
 	int	i;
 
