@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:32:41 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/11 15:14:50 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:12:27 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1024
 # endif
 
 # ifndef FD_MAX
@@ -29,17 +29,9 @@
 
 typedef struct s_list
 {
-	void			*data;
+	void			*content;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct s_dbllist
-{
-	void			*data;
-	int				len;
-	struct s_dbllist	*prev;
-	struct s_dbllist	*next;
-}					t_dbllist;
 
 // ASCII
 
@@ -73,7 +65,7 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
-int		ft_lstiter(t_list *lst, void (*f)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // MEMORY
@@ -91,7 +83,6 @@ char	*ft_itoa(int n);
 int		ft_digitcount(unsigned int n, unsigned int base);
 
 // PRINTING
-int		ft_printf(const char *format, ...);
 int		ft_putchar(char c);
 int		ft_putstr(const char *s);
 int		ft_putnbr(int n);
@@ -102,6 +93,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+int		ft_printf(const char *format, ...);
 
 // STRINGS
 size_t	ft_strlen(const char *s);

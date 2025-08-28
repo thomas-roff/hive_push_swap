@@ -26,7 +26,7 @@ void	small_stack(int **stack_a, int **stack_b, int len)
 		five_stack(stack_a, stack_b);
 }
 
-void	check_build_sort(char **array)
+int	check_build_sort(char **array)
 {
 	int	**stack_a;
 	int	**stack_b;
@@ -35,23 +35,23 @@ void	check_build_sort(char **array)
 	len = ft_arraylen(array);
 	if (ft_arrcheck(array, ft_isnum) == -1 || check_dup(array) == -1
 		|| len == 1)
-		return ;
+		return (0);
 	stack_a = build_stack(array, len);
 	stack_b = NULL;
 	if (!stack_a)
-		return ;
+		return (0);
 	if (ft_issorted(stack_a) == 1)
-		return (free_and_exit(stack_a, NULL));
+		return (free_and_exit(stack_a, NULL, 1));
 	if (len <= 5)
 	{
 		stack_b = build_empty_stack(len);
 		if (!stack_b)
-			return (free_and_exit(stack_a, NULL));
+			return (free_and_exit(stack_a, NULL, 0));
 		small_stack(stack_a, stack_b, len);
 	}
 	else
 		large_stack(stack_a, len);
-	free_and_exit(stack_a, stack_b);
+	return (free_and_exit(stack_a, stack_b, 1));
 }
 
 char	**string_input(char *str)
@@ -62,10 +62,7 @@ char	**string_input(char *str)
 		return (NULL);
 	array = ft_split(str, ' ');
 	if (!array)
-	{
-		ft_printf("ft_split error");
 		return (NULL);
-	}
 	return (array);
 }
 
@@ -78,11 +75,15 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		array = string_input(argv[1]);
-		check_build_sort(array);
+		if (!array)
+			ft_printf("Error\n");
+		if (!check_build_sort(array))
+			ft_printf("Error\n");
 		free_array(array);
 		free(array);
 	}
 	if (argc > 2)
-		check_build_sort(&argv[1]);
+		if (!check_build_sort(&argv[1]))
+			ft_printf("Error\n");
 	return (0);
 }

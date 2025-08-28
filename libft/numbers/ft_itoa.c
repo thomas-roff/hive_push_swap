@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 17:53:34 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/11 13:33:23 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:34:28 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void	ft_nbrcpy(char *num, int n, int sign, int nlen)
 {
+	int	power;
+
+	power = 1;
 	if (sign == -1)
 		num[0] = '-';
 	nlen -= 1;

@@ -46,7 +46,7 @@ int	ft_issorted(int **stack)
 	return (1);
 }
 
-void	free_and_exit(int **stack_a, int **stack_b)
+int	free_and_exit(int **stack_a, int **stack_b, int check)
 {
 	int	i;
 
@@ -70,6 +70,7 @@ void	free_and_exit(int **stack_a, int **stack_b)
 		}
 		free(stack_b);
 	}
+	return (check);
 }
 
 void	error_free_and_exit(int **stack, int len)

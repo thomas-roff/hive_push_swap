@@ -27,7 +27,7 @@ long long		ft_super_atoi(const char *nptr);
 
 int				ft_stacklen(int **stack);
 int				ft_issorted(int **stack);
-void			free_and_exit(int **stack_a, int **stack_b);
+int				free_and_exit(int **stack_a, int **stack_b, int check);
 void			error_free_and_exit(int **stack, int len);
 int				ft_uinstacklen(unsigned int **stack);
 
@@ -72,7 +72,7 @@ void			large_stack(int **stack_a, int len);
 // PUSH SWAP
 
 void			small_stack(int **stack_a, int **stack_b, int len);
-void			check_build_sort(char **array);
+int				check_build_sort(char **array);
 char			**string_input(char *str);
 int				main(int argc, char *argv[]);
 
