@@ -48,7 +48,7 @@ int	find_min(int **stack)
 	i = 0;
 	min = stack[0][0];
 	min_index = 0;
-	while (stack[++i] && stack[i][1] < 2)
+	while (stack[++i] && stack[i][1] != ARR_NT)
 	{
 		if (stack[i][0] < min)
 		{

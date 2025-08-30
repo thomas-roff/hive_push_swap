@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	check_dup(char **array)
+int	check_no_dup(char **array)
 {
 	int	i;
 	int	j;
@@ -24,12 +24,12 @@ int	check_dup(char **array)
 		while (array[i + j])
 		{
 			if (ft_strcmp(array[i], array[i + j]) == 0)
-				return (-1);
+				return (FALSE);
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 int	ft_arrcheck(char **array, int (f)(int))
@@ -44,12 +44,12 @@ int	ft_arrcheck(char **array, int (f)(int))
 		while (array[i][j])
 		{
 			if (!f(array[i][j]))
-				return (-1);
+				return (FALSE);
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 int	ft_arraylen(char **array)

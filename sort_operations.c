@@ -63,7 +63,7 @@ void	op_pa(int **stack_a, int **stack_b)
 	while (++i < len_b)
 		stack_b[i - 1][0] = stack_b[i][0];
 	stack_b[len_b - 1][0] = 0;
-	stack_b[len_b - 1][1] = 2;
+	stack_b[len_b - 1][1] = ARR_NT;
 	write(1, "pa\n", 3);
 }
 
@@ -84,6 +84,6 @@ void	op_pb(int **stack_a, int **stack_b)
 	while (++i < len_a)
 		stack_a[i - 1][0] = stack_a[i][0];
 	stack_a[len_a - 1][0] = 0;
-	stack_a[len_a - 1][1] = 2;
+	stack_a[len_a - 1][1] = ARR_NT;
 	write(1, "pb\n", 3);
 }

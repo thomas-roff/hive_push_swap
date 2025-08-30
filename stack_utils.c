@@ -25,7 +25,7 @@ int	ft_stacklen(int **stack)
 	i = 0;
 	while (stack[i])
 	{
-		if (stack[i][1] == 2 && i < len)
+		if (stack[i][1] == ARR_NT && i < len)
 			return (i);
 		i++;
 	}
@@ -40,10 +40,10 @@ int	ft_issorted(int **stack)
 	while (stack[i] && stack[i + 1])
 	{
 		if (stack[i][0] > stack[i + 1][0])
-			return (-1);
+			return (FALSE);
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 int	free_and_exit(int **stack_a, int **stack_b, int check)
@@ -98,7 +98,7 @@ int	ft_uinstacklen(unsigned int **stack)
 	i = 0;
 	while (stack[i])
 	{
-		if (stack[i][1] == 2 && i < len)
+		if (stack[i][1] == ARR_NT && i < len)
 			return (i);
 		i++;
 	}

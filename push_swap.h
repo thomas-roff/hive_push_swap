@@ -15,9 +15,38 @@
 
 # include "libft/libft.h"
 
+// CODES FOR ERROR TRACKING
+
+// SUCCESSFUL EXECUTION
+# ifndef OK
+#  define OK 1
+# endif
+
+// UNSUCCEFUL EXECUTION
+# ifndef KO
+#  define KO 0
+# endif
+
+// CODES FOR CHECKING FUNCTIONS
+
+// RETURNS TRUE
+# ifndef TRUE
+#  define TRUE 1
+# endif
+
+// RETURNS FALSE
+# ifndef FALSE
+#  define FALSE 0
+# endif
+
+// ARRAY NULL TERMINATOR
+# ifndef ARR_NT
+#  define ARR_NT 2
+# endif
+
 // ARRAY UTILITIES
 
-int				check_dup(char **array);
+int				check_no_dup(char **array);
 int				ft_arrcheck(char **array, int (f)(int));
 int				ft_arraylen(char **array);
 void			free_array(char **array);
@@ -64,7 +93,8 @@ void			five_stack(int **stack_a, int **stack_b);
 
 // RADIX SORT
 
-int				check_bit_sorted(unsigned int **stack, int bits);
+int				check_bits_sorted(unsigned int **stack, int bits);
+void			bitsort(unsigned int **a, unsigned int **b, int len, int bits);
 void			radix(unsigned int **stack_a, unsigned int **stack_b, int len);
 void			convert_to_signed(int **output, unsigned int **input);
 void			large_stack(int **stack_a, int len);

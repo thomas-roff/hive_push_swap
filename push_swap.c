@@ -33,25 +33,25 @@ int	check_build_sort(char **array)
 	int	len;
 
 	len = ft_arraylen(array);
-	if (ft_arrcheck(array, ft_isnum) == -1 || check_dup(array) == -1
+	if (ft_arrcheck(array, ft_isnum) == FALSE || check_no_dup(array) == FALSE
 		|| len == 1)
 		return (0);
 	stack_a = build_stack(array, len);
 	stack_b = NULL;
 	if (!stack_a)
 		return (0);
-	if (ft_issorted(stack_a) == 1)
-		return (free_and_exit(stack_a, NULL, 1));
+	if (ft_issorted(stack_a) == TRUE)
+		return (free_and_exit(stack_a, NULL, OK));
 	if (len <= 5)
 	{
 		stack_b = build_empty_stack(len);
 		if (!stack_b)
-			return (free_and_exit(stack_a, NULL, 0));
+			return (free_and_exit(stack_a, NULL, KO));
 		small_stack(stack_a, stack_b, len);
 	}
 	else
 		large_stack(stack_a, len);
-	return (free_and_exit(stack_a, stack_b, 1));
+	return (free_and_exit(stack_a, stack_b, OK));
 }
 
 char	**string_input(char *str)

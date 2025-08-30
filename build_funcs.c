@@ -26,7 +26,7 @@ int	**build_stack(char **array, int len)
 	{
 		stack[i] = malloc(2 * sizeof(int));
 		temp = ft_super_atoi(array[i]);
-		if (!stack[i] || temp > INT32_MAX || temp < INT32_MIN)
+		if (!stack[i] || temp > INT_MAX || temp < INT_MIN)
 		{
 			error_free_and_exit(stack, i + 1);
 			free(stack);
@@ -59,7 +59,7 @@ int	**build_empty_stack(int len)
 			return (NULL);
 		}
 		stack[i][0] = 0;
-		stack[i][1] = 2;
+		stack[i][1] = ARR_NT;
 		i++;
 	}
 	stack[len] = NULL;
@@ -80,13 +80,13 @@ unsigned int	**build_uin_stack(int **stack, int len)
 		uin_stack[i] = malloc(2 * sizeof(int));
 		if (stack)
 		{
-			uin_stack[i][0] = (unsigned int)(stack[i][0] ^ 0x80000000);
+			uin_stack[i][0] = (unsigned int)(stack[i][0] ^ INT_MIN);
 			uin_stack[i][1] = 0;
 		}
 		else
 		{
-			uin_stack[i][0] = (unsigned int)(0 ^ 0x80000000);
-			uin_stack[i][1] = 2;
+			uin_stack[i][0] = (unsigned int)(0 ^ INT_MIN);
+			uin_stack[i][1] = ARR_NT;
 		}
 		i++;
 	}
