@@ -76,7 +76,7 @@ int	main(int argc, char *argv[])
 	{
 		array = string_input(argv[1]);
 		if (!array)
-			ft_printf("Error\n");
+			ft_printf("Example feature\n");
 		if (!check_build_sort(array))
 			ft_printf("Error\n");
 		free_array(array);
