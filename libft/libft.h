@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:32:41 by thblack-          #+#    #+#             */
-/*   Updated: 2025/07/25 14:12:27 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:34:02 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <fcntl.h>
 # include <stdarg.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+# ifndef BUF_SIZE
+#  define BUF_SIZE 1024
 # endif
 
 # ifndef FD_MAX
@@ -56,6 +56,9 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 
 // GNL
+
+// Reads a file pointed to by int 'fd' and returns the first line or EOF as a
+// string
 char	*get_next_line(int fd);
 
 // LISTS
