@@ -12,8 +12,13 @@
 
 #include "../inc/push_swap.h"
 
-void	small_stack(t_int_arr *stack_a, t_int_arr *stack_b)
+int	small_stack(t_int_arr *stack_a)
 {
+	t_int_arr	*stack_b;
+
+	stack_b = build_empty_stack(stack_a->len);
+	if (!stack_b)
+		return (KO);
 	if (stack_a->len == 2)
 		op_sa(stack_a);
 	if (stack_a->len == 3)
@@ -22,34 +27,34 @@ void	small_stack(t_int_arr *stack_a, t_int_arr *stack_b)
 		four_stack(stack_a, stack_b);
 	if (stack_a->len == 5)
 		five_stack(stack_a, stack_b);
+	free_exit(NULL, stack_b, OK);
+	return (OK);
 }
 
 int	check_build_sort(char **array)
 {
 	t_int_arr	*stack_a;
-	t_int_arr	*stack_b;
 	int			len;
 
 	len = ft_arraylen(array);
-	if (ft_arrcheck(array, ft_isnum) == FALSE || check_no_dup(array) == FALSE
-		|| len == 1)
+	if (ft_arrcheck(array, ft_isnum) == FALSE || len <= 1
+		|| check_dup_strings(array) == KO || check_valid_numbers(array) == KO)
 		return (0);
 	stack_a = build_stack(array, len);
-	stack_b = NULL;
 	if (!stack_a)
 		return (0);
+	if (check_dup_int(stack_a) == KO)
+		return (free_exit(stack_a, NULL, KO));
 	if (ft_issorted(stack_a) == TRUE)
 		return (free_exit(stack_a, NULL, OK));
 	if (stack_a->len <= 5)
 	{
-		stack_b = build_empty_stack(stack_a->len);
-		if (!stack_b)
+		if (!small_stack(stack_a))
 			return (free_exit(stack_a, NULL, KO));
-		small_stack(stack_a, stack_b);
 	}
 	else
 		large_stack(stack_a);
-	return (free_exit(stack_a, stack_b, OK));
+	return (free_exit(stack_a, NULL, OK));
 }
 
 char	**string_input(char *str)

@@ -54,19 +54,19 @@ typedef struct s_uint_arr
 
 // ARRAY UTILITIES
 
-int				check_no_dup(char **array);
+int				check_dup_strings(char **array);
+int				check_valid_numbers(char **array);
 int				ft_arrcheck(char **array, int (f)(int));
 int				ft_arraylen(char **array);
 void			free_array(char **array);
-long long		ft_super_atoi(const char *nptr);
 
 // STACK UTILITIES
 
-// int				ft_stacklen(t_int_arr *stack);
 int				ft_issorted(t_int_arr *stack);
 int				free_exit(t_int_arr *stack_a, t_int_arr *stack_b, int check);
 void			error_free_exit(t_int_arr *stack);
-// int				ft_uinstacklen(t_uint_arr *stack);
+long long		ft_super_atoi(const char *nptr);
+int				check_dup_int(t_int_arr *stack);
 
 // BUILD FUNCTIONS
 
@@ -108,7 +108,7 @@ void			large_stack(t_int_arr *stack_a);
 
 // PUSH SWAP
 
-void			small_stack(t_int_arr *stack_a, t_int_arr *stack_b);
+int				small_stack(t_int_arr *stack_a);
 int				check_build_sort(char **array);
 char			**string_input(char *str);
 int				main(int argc, char *argv[]);

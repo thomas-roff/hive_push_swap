@@ -46,3 +46,49 @@ void	error_free_exit(t_int_arr *stack)
 	free(stack->arr);
 	free(stack);
 }
+
+long long	ft_super_atoi(const char *nptr)
+{
+	long long	res;
+	int			pn;
+	int			digit;
+
+	res = 0;
+	pn = 1;
+	while (ft_isspace((int)*nptr) == 1)
+		nptr++;
+	if (*nptr == '-')
+	{
+		pn = pn * -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (ft_isdigit((int)*nptr) == 1)
+	{
+		digit = *nptr - '0';
+		res = res * 10 + digit;
+		nptr++;
+	}
+	return (res * pn);
+}
+
+int	check_dup_int(t_int_arr *stack)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < stack->len - 1)
+	{
+		j = 1;
+		while (i + j < stack->len)
+		{
+			if (stack->arr[i + j] == stack->arr[i])
+				return (KO);
+			j++;
+		}
+		i++;
+	}
+	return (OK);
+}

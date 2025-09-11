@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-int	check_no_dup(char **array)
+int	check_dup_strings(char **array)
 {
 	int	i;
 	int	j;
@@ -24,9 +24,31 @@ int	check_no_dup(char **array)
 		while (array[i + j])
 		{
 			if (ft_strcmp(array[i], array[i + j]) == 0)
-				return (FALSE);
+				return (KO);
 			j++;
 		}
+		i++;
+	}
+	return (OK);
+}
+
+int	check_valid_numbers(char **array)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (array[i])
+	{
+		j = 0;
+		while (ft_isspace(array[i][j]))
+			j++;
+		while (array[i][j] == '+' || array[i][j] == '-')
+			j++;
+		while (ft_isdigit(array[i][j]))
+			j++;
+		if (array[i][j])
+			return (FALSE);
 		i++;
 	}
 	return (TRUE);
@@ -71,30 +93,4 @@ void	free_array(char **array)
 		free(*array);
 		array++;
 	}
-}
-
-long long	ft_super_atoi(const char *nptr)
-{
-	long long	res;
-	int			pn;
-	int			digit;
-
-	res = 0;
-	pn = 1;
-	while (ft_isspace((int)*nptr) == 1)
-		nptr++;
-	if (*nptr == '-')
-	{
-		pn = pn * -1;
-		nptr++;
-	}
-	else if (*nptr == '+')
-		nptr++;
-	while (ft_isdigit((int)*nptr) == 1)
-	{
-		digit = *nptr - '0';
-		res = res * 10 + digit;
-		nptr++;
-	}
-	return (res * pn);
 }
