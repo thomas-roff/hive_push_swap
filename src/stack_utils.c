@@ -12,26 +12,6 @@
 
 #include "../inc/push_swap.h"
 
-// int	ft_stacklen(int **stack)
-// {
-// 	int	len;
-// 	int	i;
-//
-// 	if (!stack || !*stack)
-// 		return (0);
-// 	len = 0;
-// 	while (stack[len])
-// 		len++;
-// 	i = 0;
-// 	while (stack[i])
-// 	{
-// 		if (stack[i][1] == ARR_NT && i < len)
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (len);
-// }
-
 int	ft_issorted(t_int_arr *stack)
 {
 	int	i;
@@ -66,23 +46,3 @@ void	error_free_exit(t_int_arr *stack)
 	free(stack->arr);
 	free(stack);
 }
-
-// int	ft_uinstacklen(unsigned int **stack)
-// {
-// 	int	len;
-// 	int	i;
-//
-// 	if (!stack || !*stack)
-// 		return (0);
-// 	len = 0;
-// 	while (stack[len])
-// 		len++;
-// 	i = 0;
-// 	while (stack[i])
-// 	{
-// 		if (stack[i][1] == ARR_NT && i < len)
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (len);
-// }

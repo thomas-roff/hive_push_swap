@@ -74,14 +74,14 @@ int	main(int argc, char *argv[])
 	{
 		array = string_input(argv[1]);
 		if (!array)
-			ft_printf("Error\n");
+			ft_putendl_fd("Error", 2);
 		if (!check_build_sort(array))
-			ft_printf("Error\n");
+			ft_putendl_fd("Error", 2);
 		free_array(array);
 		free(array);
 	}
 	if (argc > 2)
 		if (!check_build_sort(&argv[1]))
-			ft_printf("Error\n");
+			ft_putendl_fd("Error", 2);
 	return (0);
 }
