@@ -6,11 +6,12 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:19:46 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/25 20:26:01 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:32:59 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+#include <limits.h>
 
 t_int_arr	*build_stack(char **array, int len)
 {
@@ -63,64 +64,64 @@ t_int_arr	*build_empty_stack(int len)
 	return (stack);
 }
 
-t_uint_arr	*build_uin_stack(t_int_arr *stack)
+void	copy_to_index_stack(t_index_arr *output, t_int_arr *input)
 {
-	t_uint_arr	*uin_stack;
-	int			i;
+	int	i;
 
-	uin_stack = (t_uint_arr *)malloc(sizeof(t_uint_arr));
-	if (!uin_stack)
-		return (NULL);
-	uin_stack->arr = (unsigned int *)malloc(stack->len * sizeof(unsigned int));
-	if (!uin_stack->arr)
-	{
-		free(uin_stack);
-		return (NULL);
-	}
 	i = 0;
-	while (i < stack->len)
+	while (i < input->len)
 	{
-		uin_stack->arr[i] = (unsigned int)(stack->arr[i] ^ INT_MIN);
+		output->arr[i] = input->arr[i];
+		output->index[i] = 0;
 		i++;
 	}
-	uin_stack->len = stack->len;
-	return (uin_stack);
+	output->len = input->len;
 }
 
-t_uint_arr	*build_empty_uin_stack(int len)
+t_index_arr	*build_index_stack(t_int_arr *stack)
 {
-	t_uint_arr	*uin_stack;
+	t_index_arr	*index_stack;
+
+	index_stack = (t_index_arr *)malloc(sizeof(t_index_arr));
+	if (!index_stack)
+		return (NULL);
+	index_stack->arr = malloc(stack->len * sizeof(int));
+	index_stack->index = malloc(stack->len * sizeof(unsigned int));
+	if (!index_stack->arr || !index_stack->index)
+	{
+		free_exit_index(index_stack);
+		free(index_stack);
+		return (NULL);
+	}
+	copy_to_index_stack(index_stack, stack);
+	assign_index(index_stack, find_min(stack));
+	index_stack->len = stack->len;
+	return (index_stack);
+}
+
+t_index_arr	*build_empty_index_stack(int len)
+{
+	t_index_arr	*index_stack;
 	int			i;
 
-	uin_stack = (t_uint_arr *)malloc(sizeof(t_uint_arr));
-	if (!uin_stack)
+	index_stack = (t_index_arr *)malloc(sizeof(t_index_arr));
+	if (!index_stack)
 		return (NULL);
-	uin_stack->arr = (unsigned int *)malloc(len * sizeof(unsigned int));
-	if (!uin_stack->arr)
+	index_stack->arr = malloc(len * sizeof(int));
+	index_stack->index = malloc(len * sizeof(unsigned int));
+	if (!index_stack->arr || !index_stack->index)
 	{
-		free(uin_stack);
+		free_exit_index(index_stack);
+		free(index_stack);
 		return (NULL);
 	}
 	i = 0;
 	while (i < len)
 	{
-		uin_stack->arr[0] = 0;
+		index_stack->arr[0] = 0;
+		index_stack->index[0] = 0;
 		i++;
 	}
-	uin_stack->len = 0;
-	return (uin_stack);
-}
-
-void	free_exit_uin(t_uint_arr *stack_a, t_uint_arr *stack_b)
-{
-	if (stack_a)
-	{
-		free(stack_a->arr);
-		free(stack_a);
-	}
-	if (stack_b)
-	{
-		free(stack_b->arr);
-		free(stack_b);
-	}
+	index_stack->len = 0;
+	return (index_stack);
 }

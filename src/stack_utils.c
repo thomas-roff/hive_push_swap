@@ -41,10 +41,16 @@ int	free_exit(t_int_arr *stack_a, t_int_arr *stack_b, int check)
 	return (check);
 }
 
-void	error_free_exit(t_int_arr *stack)
+void	free_exit_index(t_index_arr *stack)
 {
-	free(stack->arr);
-	free(stack);
+	if (stack)
+	{
+		if (stack->arr)
+			free(stack->arr);
+		if (stack->index)
+			free(stack->index);
+		free(stack);
+	}
 }
 
 long long	ft_super_atoi(const char *nptr)

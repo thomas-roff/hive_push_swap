@@ -6,7 +6,7 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2025/09/09 17:04:45 by thblack-         ###   ########.fr        #
+#    Updated: 2025/09/12 11:34:44 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INC_DIR		= inc
 
 # PROJECT SOURCES: Explicitly states
 SRC_FILES	= push_swap.c array_utils.c build_funcs.c small_stacks.c \
-			  sort_operations.c stack_utils.c uin_sort_operations.c \
+			  sort_operations.c stack_utils.c index_sort_operations.c \
 			  radix_sort.c
 SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

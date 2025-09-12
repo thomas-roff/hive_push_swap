@@ -6,11 +6,28 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 10:03:50 by thblack-          #+#    #+#             */
-/*   Updated: 2025/08/27 15:43:06 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:31:31 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+
+void	large_stack(t_int_arr *stack)
+{
+	t_index_arr	*index_stack_a;
+	t_index_arr	*index_stack_b;
+
+	index_stack_a = build_index_stack(stack);
+	if (!index_stack_a)
+		return ;
+	index_stack_b = build_empty_index_stack(stack->len);
+	if (!index_stack_b)
+		return (free_exit_index(index_stack_a));
+	radix(index_stack_a, index_stack_b);
+	copy_values(stack, index_stack_a);
+	free_exit_index(index_stack_a);
+	free_exit_index(index_stack_b);
+}
 
 int	small_stack(t_int_arr *stack_a)
 {
@@ -37,9 +54,11 @@ int	check_build_sort(char **array)
 	int			len;
 
 	len = ft_arraylen(array);
-	if (ft_arrcheck(array, ft_isnum) == FALSE || len <= 1
+	if (ft_arrcheck(array, ft_isnum) == FALSE || len < 1
 		|| check_dup_strings(array) == KO || check_valid_numbers(array) == KO)
-		return (0);
+		return (KO);
+	if (len == 1)
+		return (OK);
 	stack_a = build_stack(array, len);
 	if (!stack_a)
 		return (0);
