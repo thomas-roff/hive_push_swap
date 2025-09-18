@@ -6,7 +6,7 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2025/09/18 12:59:52 by thblack-         ###   ########.fr        #
+#    Updated: 2025/09/18 13:53:36 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,16 +76,25 @@ start:
 finish:
 	@echo "==== BUILD COMPLETE ========="
 
+re_spacer:
+	@echo ""
+
 clean:
-	@echo "Removing object files"
+	@echo "==== THOMASROFF MAKEFILE ===="
+	@echo "Removing $(PROJECT) object files"
 	@rm -f $(OBJ)
 	@make -C libft clean --no-print-directory
+	@echo "==== CLEAN COMPLETE ========="
 
-fclean: clean
-	@echo "Removing static library files"
+fclean:
+	@echo "==== THOMASROFF MAKEFILE ===="
+	@echo "Removing $(PROJECT) object files"
+	@rm -f $(OBJ)
+	@echo "Removing $(PROJECT) static library files"
 	@rm -f $(NAME)
 	@make -C libft fclean --no-print-directory
+	@echo "==== FCLEAN COMPLETE ========"
 
-re: fclean all
+re: fclean re_spacer all
 
-.PHONY: all start finish clean fclean re
+.PHONY: all start finish clean fclean re re_spacer
