@@ -50,14 +50,27 @@ void	bitsort(t_index_arr *a, t_index_arr *b, int bits)
 		index_op_pa(a, b);
 }
 
+int	ft_bitsize_int(int nbr)
+{
+	int	res;
+
+	res = 1;
+	while (nbr > 1)
+	{
+		nbr /= 2;
+		res++;
+	}
+	return (res);
+}
+
 void	radix(t_index_arr *stack_a, t_index_arr *stack_b)
 {
 	int	bit_shift;
-	int	int_bit_length;
+	int	index_bit_size;
 
 	bit_shift = 0;
-	int_bit_length = ((int) sizeof(int) * CHAR_BIT);
-	while (bit_shift < int_bit_length)
+	index_bit_size = ft_bitsize_int(stack_a->len);
+	while (bit_shift < index_bit_size)
 	{
 		if (check_bits_sorted(stack_a, bit_shift) == FALSE)
 			bitsort(stack_a, stack_b, bit_shift);
