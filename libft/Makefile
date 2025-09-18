@@ -71,26 +71,25 @@ NAME = libft.a
 all: start $(NAME) finish
 
 start:
-	@echo "==== BUILDING LIB_FT ======="
+	@echo "==== BUILDING LIB_FT ========"
 
 finish:
-	@echo "==== BUILD FINISHED! ======="
 
 $(NAME): $(OBJECTS)
 	@$(AR) $(NAME) $(OBJECTS)
-	@echo "Library compiled."
+	@echo "Library compiled"
 
 $(O_DIR)/%.o: %.c $(HEADER)
 	@$(MKDIR) $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "Removing libft object files."
+	@echo "Removing libft object files"
 	@$(RMFILE) $(OBJECTS)
 	@$(RMDIR) $(O_DIR)
 
 fclean: clean
-	@echo "Removing libft static library files."
+	@echo "Removing libft static library files"
 	@$(RMFILE) $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:08:42 by thblack-          #+#    #+#             */
-/*   Updated: 2025/09/12 11:19:16 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/09/18 12:58:30 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,4 @@ void	copy_values(t_int_arr *output, t_index_arr *input)
 		output->arr[i] = input->arr[i];
 		i++;
 	}
-}
-
-void	print_stack(t_index_arr *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->len)
-	{
-		ft_printf("Value %d Index %d\n", stack->arr[i], stack->index[i]);
-		i++;
-	}
-	ft_printf("Len is: %d\n", stack->len);
 }

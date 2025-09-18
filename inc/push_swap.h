@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:07:57 by thblack-          #+#    #+#             */
-/*   Updated: 2025/09/12 11:34:09 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/09/18 12:59:30 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,16 @@ typedef struct s_index_arr
 
 // ARRAY UTILITIES
 
-int				check_dup_strings(char **array);
-int				check_valid_numbers(char **array);
-int				ft_arrcheck(char **array, int (f)(int));
 int				ft_arraylen(char **array);
 void			free_array(char **array);
+
+// CHECK UTILITIES
+
+int				check_dup_strings(char **array);
+int				check_valid_numbers(char **array);
+int				ft_isarr(char **array, int (f)(int));
+int				ft_arrchr(char **array, int (f)(int));
+int				arraycheck(char **array);
 
 // STACK UTILITIES
 
@@ -113,7 +118,7 @@ void			copy_values(t_int_arr *output, t_index_arr *input);
 void			large_stack(t_int_arr *stack_a);
 int				small_stack(t_int_arr *stack_a);
 int				check_build_sort(char **array);
-char			**string_input(char *str);
+int				string_input(char *str);
 int				main(int argc, char *argv[]);
 
 #endif

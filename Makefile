@@ -6,7 +6,7 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2025/09/12 11:34:44 by thblack-         ###   ########.fr        #
+#    Updated: 2025/09/18 12:59:52 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC_DIR		= inc
 # PROJECT SOURCES: Explicitly states
 SRC_FILES	= push_swap.c array_utils.c build_funcs.c small_stacks.c \
 			  sort_operations.c stack_utils.c index_sort_operations.c \
-			  radix_sort.c
+			  radix_sort.c check_utils.c
 SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 # PROJECT HEADER
@@ -55,7 +55,9 @@ LIBFT		= -L$(LIBFT_DIR) -lft
 all: start $(NAME) finish
 
 $(NAME): $(OBJ) $(LIBFT_A)
+	@echo "==== BUILDING $(PROJECT) ====="
 	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $(NAME)
+	@echo "$(PROJECT) compiled"
 
 $(LIBFT_A):
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
@@ -70,18 +72,17 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) $(LIBFT_H) | $(OBJ_DIR)
 
 start:
 	@echo "==== THOMASROFF MAKEFILE ===="
-	@echo "Building $(PROJECT)"
 
 finish:
-	@echo "====== BUILD COMPLETE ======="
+	@echo "==== BUILD COMPLETE ========="
 
 clean:
-	@echo "Removing object files."
+	@echo "Removing object files"
 	@rm -f $(OBJ)
 	@make -C libft clean --no-print-directory
 
 fclean: clean
-	@echo "Removing static library files."
+	@echo "Removing static library files"
 	@rm -f $(NAME)
 	@make -C libft fclean --no-print-directory
 

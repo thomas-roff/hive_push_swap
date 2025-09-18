@@ -6,11 +6,12 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 10:03:50 by thblack-          #+#    #+#             */
-/*   Updated: 2025/09/12 11:31:31 by thblack-         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:32:28 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+#include <stdlib.h>
 
 void	large_stack(t_int_arr *stack)
 {
@@ -54,10 +55,11 @@ int	check_build_sort(char **array)
 	int			len;
 
 	len = ft_arraylen(array);
-	if (ft_arrcheck(array, ft_isnum) == FALSE || len < 1
+	if (ft_isarr(array, ft_isnum) == FALSE
+		|| arraycheck(array) == FALSE || len < 0
 		|| check_dup_strings(array) == KO || check_valid_numbers(array) == KO)
 		return (KO);
-	if (len == 1)
+	if (len == 1 || len == 0)
 		return (OK);
 	stack_a = build_stack(array, len);
 	if (!stack_a)
@@ -76,36 +78,38 @@ int	check_build_sort(char **array)
 	return (free_exit(stack_a, NULL, OK));
 }
 
-char	**string_input(char *str)
+int	string_input(char *str)
 {
-	char		**array;
+	char	**array;
+	int		error_flag;
 
 	if (!str)
-		return (NULL);
+		return (KO);
 	array = ft_split(str, ' ');
 	if (!array)
-		return (NULL);
-	return (array);
+		return (KO);
+	error_flag = check_build_sort(array);
+	free_array(array);
+	free(array);
+	if (!error_flag)
+		return (KO);
+	return (OK);
 }
 
 int	main(int argc, char *argv[])
 {
-	char	**array;
+	int		error_flag;
 
 	if (argc == 1)
 		return (0);
 	if (argc == 2)
-	{
-		array = string_input(argv[1]);
-		if (!array)
-			ft_putendl_fd("Error", 2);
-		if (!check_build_sort(array))
-			ft_putendl_fd("Error", 2);
-		free_array(array);
-		free(array);
-	}
+		error_flag = string_input(argv[1]);
 	if (argc > 2)
-		if (!check_build_sort(&argv[1]))
-			ft_putendl_fd("Error", 2);
-	return (0);
+		error_flag = check_build_sort(&argv[1]);
+	if (!error_flag)
+	{
+		ft_putendl_fd("Error", 2);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

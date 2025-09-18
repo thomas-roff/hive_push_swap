@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+#include <limits.h>
 
 int	ft_issorted(t_int_arr *stack)
 {
@@ -74,6 +75,8 @@ long long	ft_super_atoi(const char *nptr)
 	{
 		digit = *nptr - '0';
 		res = res * 10 + digit;
+		if (res > INT_MAX + (long)1)
+			return (res);
 		nptr++;
 	}
 	return (res * pn);
